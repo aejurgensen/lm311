@@ -10,24 +10,65 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+    body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+    #scroll { position: relative; }
+
+    .scroll__graphic {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: auto;
+        width: 100%;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .scroll__graphic.is-fixed { position: fixed; }
+
+    .scroll__graphic.is-bottom {
+        bottom: 0;
+        top: auto;
+    }
+
+    .scroll__graphic .chart {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .scroll__text {
+        padding: 0 1rem;
+        max-width: 30rem;
+    }
+
+    .step {
+        opacity: 0;
+        padding: 1rem;
+    }
+
+    .step.is-active { opacity: 1; }
 </style>
-
-<script src="https://unpkg.com/intersection-observer"></script>
-<script src="https://unpkg.com/scrollama"></script>
-
 </head>
     
 
 <body class="w3-light-grey">
-    <div class="w3-content" style="max-width:1400px">
+<main>
+<div class="w3-content" style="max-width:1400px">
 
+<section id="intro">
     <header class="w3-container w3-center w3-padding-32">
         <h1><b>Lake Merritt 311 Service Requests</b></h1>
         <p>Has Lake Merritt really gone to hell since the COVID-19 pandemic began?</p>
         <p>Anna E. Jurgensen</p>
     </header>
-    
+</section>
+
+<section id='scroll'>
     <p>Oakland's "Crown Jewel," Lake Merritt, is home to the <a href="https://www.atlasobscura.com/articles/lake-merritt-bird-islands-oakland" target="_blank">oldest 
        wildlife refuge in the US</a>, the <a href="https://www.owrcrowers.org/" target="_blank">oldest ongoing women's 
        whaleboat rowing club in the US</a>, a <a href="https://www.lakemerritt.org/recreation.html" target="_blank">variety of  
@@ -37,15 +78,29 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
        have led to what they claim are more traffic snarls, vandalism, littering, and dumping around the lake and in the nearby neighborhoods.
         In this project I examine 311 service requests made in the Lake Merritt Area both before and during the pandemic 
         to examine which, if any, types of complaints have in fact increased from pred-pandemic levels.
-    
-    </p>
 
+    </p>
+</section>
+
+<!--<section id='scroll'>
     <h2>Alpha Release</h2>
     <div>
         <embed src="alpha-release.pdf" width="1000" height="500" 
  type="application/pdf">
     </div>
 
+</section>-->
+<h4><a href="https://bl.ocks.org/aejurgensen/raw/29f89d634620dabf136624636eb0983f/?raw=true" target="_blank">Lake Merritt Features</a></h4>
 
+
+<h4><a href="https://bl.ocks.org/aejurgensen/raw/48f23e29f51bc6a62dd0ae6458bb3b0c/?raw=true" target="_blank">Map of reports</a></h4>
+
+</div>
+</main>
 </body>
+
+
+<script src="https://unpkg.com/intersection-observer"></script>
+<script src="https://unpkg.com/scrollama"></script>
+
 </html>
