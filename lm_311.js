@@ -392,7 +392,7 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                         'litter':"Litter",
                         'parking': "Illegal Parking"}
 
-            let selected_years = [];
+            let selected_years = [2019, 2020];
             let line_data = [];
             let dot_data = [];
 
