@@ -1,129 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Lake Merritt 311</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
 
-<!-- some style from https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_blog&stacked=h 
-     I'm so tired, this for now. -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<style>
-    body,h1,h2,h3,h4,h5 {
-        font-family: "Raleway", sans-serif;
-        margin: 50px;
-        }
-
-    #scroll { position: relative; }
-
-    .scroll__graphic {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: auto;
-        width: 100%;
-        -webkit-transform: translate3d(0, 0, 0);
-        -moz-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-
-    .scroll__graphic.is-fixed { position: fixed; }
-
-    .scroll__graphic.is-bottom {
-        bottom: 0;
-        top: auto;
-    }
-
-    .scroll__graphic .chart {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        -moz-transform: translateY(-50%);
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-
-    .scroll__text {
-        padding: 0 1rem;
-        max-width: 30rem;
-    }
-
-    .step {
-        opacity: 0;
-        padding: 1rem;
-    }
-
-    .step.is-active { opacity: 1; }
-</style>
-</head>
+    <!--d3-->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js"></script>
     
+    <!--leaflet-->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""
+    />
+    <script
+        src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""
+    ></script>
 
-<body class="w3-light-grey">
-<main>
-<div class="w3-content" style="max-width:1400px">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    
+    <title>Lake Merritt 311</title>
+</head>
+<body>
+    <main id="top"><div style="width:100%;">
+        <div class="parallax">
+            <div class="hsContent">
+                <h1>Lake Merritt 311 Service Requests</h1>
+                <h3 style="font-weight: normal;">Has Lake Merritt really gone to hell since the pandemic began?</h3>
+                <h4 style="padding-top: 2rem;">Anna Jurgensen</h4>
+            </div>
+            <div class="attribution">
+                <p><a href="http://www.davejhiggins.com/lake-merritt-real-estate-for-sale.php" target="_blank">photo by Dave J. Higgins</a></p>
+            </div>
+        </div>
+                
+        <div class="textblock">
+            <p>Oakland's "Crown Jewel," Lake Merritt, is home to the <a href="https://www.atlasobscura.com/articles/lake-merritt-bird-islands-oakland" target="_blank">oldest 
+                wildlife refuge in the US</a>, the <a href="https://www.owrcrowers.org/" target="_blank">oldest ongoing women's 
+                whaleboat rowing club in the US</a>, a <a href="https://www.lakemerritt.org/recreation.html" target="_blank">variety of  
+                recreational clubs</a>, and <a href="https://www.lakemerritt.org/gardens.html" target="_blank">several gardens</a>.  
+                It's now also home to <a href="https://sanfrancisco.cbslocal.com/2021/04/04/covid-oakland-officials-cracking-down-weekend-crowds-lake-merritt/" 
+                target="_blank">frustrated residents</a> who have complained throughout the pandemic that increased crowds 
+                have led to what they claim are more traffic snarls, vandalism, littering, and dumping around the lake and in the nearby neighborhoods.
+                 In this project I examine 311 service requests made in the Lake Merritt Area both before and during the pandemic 
+                 to examine which, if any, types of complaints have in fact increased from their pre-pandemic levels.</p>
+        </div>
 
-<section id="intro">
-    <header class="w3-container w3-center w3-padding-32">
-        <h1><b>Lake Merritt 311 Service Requests</b></h1>
-        <p>Has Lake Merritt really gone to hell since the COVID-19 pandemic began?</p>
-        <p>Anna E. Jurgensen</p>
-    </header>
-</section>
+        <section id="featues">
+            <div class="parallax2">
+                <div class="hsContent">
+                    <h1>The Lake</h1>
+                </div>
+                <div class="attribution">
+                    <p><a href="https://www.visitoakland.com/" target="_blank">photo by Visit Oakland</a></p>
+                </div>
+            </div>
+            
+            <!--features map-->
+            <div class="mapblock">
+                <div id="featuresmap" class="mapcontainer"></div>
+                <script src="lm_features_map.js"></script>
+                <div class="maptext" id="featuresmaptext">
+                    <h3>Feature Name</h3>
+                    <p id="info">Map text goes here.</p>
+                    <div class="infosource">
+                        <p>sources:</p>
+                        <ul style="padding-top:0px;"><li>info source</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id='scroll'>
-    <p>Oakland's "Crown Jewel," Lake Merritt, is home to the <a href="https://www.atlasobscura.com/articles/lake-merritt-bird-islands-oakland" target="_blank">oldest 
-       wildlife refuge in the US</a>, the <a href="https://www.owrcrowers.org/" target="_blank">oldest ongoing women's 
-       whaleboat rowing club in the US</a>, a <a href="https://www.lakemerritt.org/recreation.html" target="_blank">variety of  
-       recreational clubs</a>, and <a href="https://www.lakemerritt.org/gardens.html" target="_blank">several gardens</a>.  
-       It's now also home to <a href="https://sanfrancisco.cbslocal.com/2021/04/04/covid-oakland-officials-cracking-down-weekend-crowds-lake-merritt/" 
-       target="_blank">frustrated residents</a> who have complained throughout the pandemic that increased crowds 
-       have led to what they claim are more traffic snarls, vandalism, littering, and dumping around the lake and in the nearby neighborhoods.
-        In this project I examine 311 service requests made in the Lake Merritt Area both before and during the pandemic 
-        to examine which, if any, types of complaints have in fact increased from pred-pandemic levels.
+        <section id="data">
+            <div class="parallax3">
+                <div class="hsContent">
+                    <h1>The Data</h1>
+                </div>
+                <div class="attribution">
+                    <p><a href="https://mwg.aaa.com/via/places-visit/lake-merritt-oakland" target="_blank">photo by Cheryl Rinzler/Alamy</a></p>
+                </div>
+            </div>
 
-    </p>
-</section>
+            <div class="textblock">
+                <p></p>
+            </div>
+        </section>
 
-<!--<section id='scroll'>
-    <h2>Alpha Release</h2>
-    <div>
-        <embed src="alpha-release.pdf" width="1000" height="500" 
- type="application/pdf">
-    </div>
 
-</section>-->
-<h4><a href="https://bl.ocks.org/aejurgensen/raw/29f89d634620dabf136624636eb0983f/?raw=true" target="_blank">Lake Merritt Features</a></h4>
+        <div class="parallax4">
+            <div class="hsContent" id="findings">
+                <h1>Findings</h1>
+            </div>
+            <div class="attribution">
+                <p><a href="https://www.sftravel.com/article/bart-4-things-do-lake-merritt-oakland" target="_blank">photo by San Francisco Travel</a></p>
+            </div>
+        </div>
 
-<h4>Total Request Volume Pre- vs Mid-Pandemic</h4>
-<img src="assets/pandemic_interleaved.png" alt="pandemic interleaved" width="600" height="400">
+        <section id="scrollytelling"><div class="inner">
+            <figure><div class="figure1"> 
+                <svg height="100%" id="img1" ></svg>
+                <svg class="svg2" height="100%" id="img2" ></svg>
+            </div></figure>
 
-<h4>Requests Across Months of Year</h4>
-<h5>Illegal Dumping</h5>
-<img src="assets/dumping_requests.png" alt="dumping requests" width="600" height="400">
+            <article>
+                <!-- bar chart messages -->
+                <div class="step">
+                    <p>In general we see that...</p>
+                </div>
+                <div class="step">
+                    <p>Looking at dumping...</p>
+                </div>
+                <div class="step">
+                    <p>Looking at graffiti</p>
+                </div>
+                <div class="step">
+                    <p>Looking at streets</p>
+                </div>
+                <div class="step">
+                    <p>Looking at parking</p>
+                </div>
+                <div class="step">
+                    <p>Looking at litter</p>
+                </div>
+        
+                <!-- line chart by month messages -->
+                <div class="step">
+                    <p>Monthly dumping request volume...  (click on year names to highlight one or more years, 
+                        and hover over dots to get monthly volume totals)</p>
+                </div>
+                <div class="step">
+                    <p>Looking at graffiti</p>
+                </div>
+                <div class="step">
+                    <p>Looking at streets</p>
+                </div>
+                <div class="step">
+                    <p>Looking at paDave J. Higginsrking</p>
+                </div>
+                <div class="step last-child">
+                    <p>Looking at litter</p>
+                </div>
 
-<h5>Litter</h5>
-<img src="assets/littering_requests.png" alt="litter requests" width="600" height="400">
 
-<h5>Parking</h5>
-<img src="assets/parking_requests.png" alt="parking requests" width="600" height="400">
+                <!-- line chart by weekday messages -->
 
-<h5>Graffiti</h5>
-<img src="assets/graffiti_requests.png" alt="graffiti requests" width="600" height="400">
+                <!-- violin plot messages -->
+                
+            </article>
+        </div></section>
 
-<h5></h5>
+        <!-- violin plot -->
+        <section id="violin">
+            <div class="mapblock">
+                <div id="violinplot" class="mapcontainer"></div>
+                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                <script src="violin_plot.js"></script>
+            </div>
+        </section>
 
-<h4>Time to Close Requests</h4>
-<img src="assets/daystoclose.png" alt="days to close requests" width="600" height="400">
+        <!-- map for hotspots-->
 
-<h4><a href="https://bl.ocks.org/aejurgensen/raw/48f23e29f51bc6a62dd0ae6458bb3b0c/?raw=true" target="_blank">Map of reports</a></h4>
+        <section id="hotspots">
+            <div class="mapblock">
+                <h3 class="maptitle"></h3>
+                
+                <div id="reportsmap" class="mapcontainer"></div>
+                <script src="leaflet-heat.js"></script>
+                <script src="lm_reports_map.js"></script>
+                    
+                <div class="maptext" id="reportsmaptext">
 
-</div>
-</main>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusions">
+            <div class="parallax5">
+                <div class="hsContent">
+                    <h1>Conclusions</h1>
+                </div>
+                <div class="attribution">
+                    <p><a href="https://www.lakemerritt.org/recreation.html" target="_blank">photo by John Kirkmire</a></p>
+                </div>
+            </div>
+
+            <div class="textblock">
+                <p>conclusions</p>
+            </div>
+        </section>
+        
+
+        <section id="end">
+            <div class="parallax6">
+                <div class="attribution">
+                    <p><a href="https://www.lakemerritt.org/lm-institute.html" target="_blank">photo by John Kirkmire/lakemerritt.org</a></p>
+                </div>
+            </div>
+        </section>
+    </div></main>
+
+    <!--scrollama-->
+    <script src="https://unpkg.com/intersection-observer"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src="lm_311.js"></script>
 </body>
-
-
-<script src="https://unpkg.com/intersection-observer"></script>
-<script src="https://unpkg.com/scrollama"></script>
-
 </html>

@@ -1,0 +1,264 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.main {
+    -webkit-overflow-scrolling: touch;
+    transform: translate3d(0, 0, 0); 
+}
+
+body {
+    background-color: "white";
+    margin:0px;
+}
+
+.inner {
+    width: 1200px;
+    margin: auto;
+}
+
+#scrollytelling {
+    position: relative;
+    padding: 1rem;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+article {
+    position: relative;
+    padding: 0 0;
+    max-width: 300px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: auto;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+figure {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 600px;
+    width: 900px;
+    margin: 0;
+    min-height: 250px;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.step {
+    position: relative;
+    margin: 0 auto 2rem auto;
+}
+
+.step.last-child {
+    /* remove extra space at the bottom of last step in article */
+    margin-bottom: 0;
+}
+
+.step p {
+    position: relative;
+    text-align: center;
+    padding: 0.5rem;
+    opacity: 0.95;
+    box-shadow: 0 0 10px #233E53;
+    border-radius: 15px;
+}
+
+.textblock {
+    max-width: 950px;
+    min-height: 500px;
+    margin:auto;
+    text-align: center;
+    padding-top:200px;
+}
+
+.mapblock {
+    position:relative;
+    width:1200px;
+    min-height:900px;
+    padding-top:100px;
+    margin:auto;
+}
+
+.mapcontainer {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    right:20px;
+    margin-top:50px;
+}
+
+.maptitle {
+    position:absolute;
+    width: 700px;
+    right: 20px;
+    text-align:center;
+}
+
+.maptext {
+    position:absolute;
+    width:275px;
+    height:700px;
+    left:100px;
+    padding-top:20px;
+    text-align: center;
+}
+
+.maptext, .textblock, .step p {
+    font-size:1.25rem;
+}
+
+.infosource {
+    padding-top:30px;
+    text-align: left;
+    font-size:0.8rem;
+    font-style: italic;
+}
+
+/* https://www.w3docs.com/snippets/html/how-to-create-a-list-with-dashes-in-html.html */
+/*.infosource ul li:before {
+    content: '\2014';
+    position: absolute;
+    margin-left: -20px;
+}*/
+
+.infosource ul {
+    padding:0px;
+}
+
+.infosource ul li {
+    list-style-type: none;
+}
+
+
+/* parallax styling from https://www.w3schools.com/howto/howto_css_parallax.asp and
+   https://ihatetomatoes.net/demos/simple-parallax-scrolling-tutorial/ */
+.parallax {
+    background: url("assets/lake_merritt_pelicans.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 900px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    overflow: hidden;
+	position: relative;
+}
+
+.parallax2 {
+    background: url("assets/LakeChalet.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 900px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    overflow: hidden;
+	position: relative;
+}
+
+.parallax3 {
+    background: url("assets/pergola_rose.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 900px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    overflow: hidden;
+	position: relative;
+}
+
+.parallax4 {
+    background: url("assets/lake_merritt_finger.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 900px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    overflow: hidden;
+	position: relative;
+}
+
+.parallax5 {
+    background: url("assets/rowers_courthouse.jpg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 900px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    overflow: hidden;
+	position: relative;
+}
+
+.parallax6 {
+    background: url("assets/birds_on_boom.jpg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 900px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    overflow: hidden;
+	position: relative;
+}
+
+.hsContent {
+    max-width:800px;
+	position: relative;
+	top: 30%;
+
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    padding:25px;
+    color:white;
+    background-color: rgba(0,0,0,0.7);
+    border-color: black;
+    border-radius: 15px;
+    border-width: 10px;
+    box-shadow: inset 0 0 10px gray;
+    
+}
+
+@media only screen and (max-device-width: 1366px) {
+    .parallax {
+        background-attachment: scroll;
+    }
+}
+
+.attribution {
+    color: white;
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    font-size:0.75rem;
+}
+
+.attribution a {
+    color:white;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 3rem;
+}
