@@ -29,7 +29,7 @@ body {
 article {
     position: relative;
     padding: 0 0;
-    max-width: 300px;
+    max-width: 290px;
     margin-top: 0;
     margin-left: 0;
     margin-right: auto;
@@ -261,4 +261,10 @@ figure {
 
 h1 {
     font-size: 3rem;
+}
+
+table, th, td {
+    font-size: 0.9rem;
+    border: 1px solid dimgray;
+    color: dimgray;
 }

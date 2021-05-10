@@ -86,7 +86,19 @@
             </div>
 
             <div class="textblock">
-                <p></p>
+                <p>
+                    The data was obtained from the <a href="https://www.oaklandca.gov/services/oak311" target="_blank">City of Oakland's 311 request system</a>, which 
+                    allows members of the public to report issues like graffiti, illegal dumping, and damaged infrastructure to the city via phone call, a web form, or phone apps. 
+                    The data is <a href="https://dev.socrata.com/foundry/data.oaklandca.gov/quth-gb8e" target="_blank">publicly available</a>, was retrieved using the 
+                    the python client for the Socrata Open Data API, <a href="https://github.com/xmunoz/sodapy" target="_blank">sodapy</a>.  I then cleaned the data in
+                    python using the pandas module, starting by removing requests with 'canceled' status, 
+                    which included all requests that were accidentally filed, tests of the system, or were requests that the city had determined were duplicates of existing 
+                    requests.   Using module geopandas, the datapoints were then clipped to a polygon that included the lake, the parks that flank the lake, and
+                    a swathe of the adjacent neighborhood approximately 500 meters deep, which was generated using 
+                    <a href="http://arthur-e.github.io/Wicket/sandbox-gmaps3.html" target="_blank">Wicket</a>.  
+                    Lastly, I manually reviewed the nearly 400 unique request descriptions found in the data, mapped them to one of six categories ("illegal dumping", 
+                    "litter", "graffiti", "illegal parking", "street maintenance", or "not targeted"), and limited the data to the five categories of interest.
+                </p>
             </div>
         </section>
 
@@ -109,47 +121,272 @@
             <article>
                 <!-- bar chart messages -->
                 <div class="step">
-                    <p>In general we see that...</p>
+                    <p>To start my exploration, I compared overall request volume for 
+                        each of my 5 categories of interest for the first year of the pandemic 
+                        (the "pandemic" period, covering March 1, 2020 through February 28, 2021) and the 
+                        year immediately preceding it (the "pre-pandemic" period, covering March 1, 2019 
+                        through February 29, 2020). Looking at the bar chart to the right, we can see that 
+                        while some categories of requests did in fact increase in volume in the pandemic 
+                        period from their levels in the pre-pandemic year, volumes for two categories 
+                        actually <em>decreased</em> during the pandemic period.
+                       </p>
                 </div>
                 <div class="step">
-                    <p>Looking at dumping...</p>
+                    <p>Looking at dumping, we see the most significant increase of any of the categories, 
+                        with a 25.5% increase in the pandemic period request volume from the pre-pandemic one. 
+                        This seems like a large increase, and looking at the table below we see that it is 
+                        in fact unusually high compared to the percent-change seen in the preceding years.
+                    </p>
+                    <table style="width:100%">
+                        <tr>
+                          <th>Year Ending</th>
+                          <th>Volume</th> 
+                          <th>Change From Prev. Year</th>
+                        </tr>
+                        <tr>
+                          <td>2/28/21</td>
+                          <td>940</td>
+                          <td>+25.5%</td>
+                        </tr>This is one 
+                        <tr>
+                          <td>2/29/20</td>
+                          <td>749</td>
+                          <td>+7.8%</td>
+                        </tr>
+                        <tr>
+                          <td>2/28/19</td>
+                          <td>695</td>
+                          <td>+2.4%</td>
+                        </tr>
+                         <tr>
+                          <td>2/28/18</td>
+                          <td>679</td>
+                          <td>-2.4%</td>
+                        </tr>
+                          <tr>
+                          <td>2/28/17</td>
+                          <td>696</td>
+                          <td>not calculated</td>
+                        </tr>
+                          
+                      </table>
+                      
                 </div>
                 <div class="step">
-                    <p>Looking at graffiti</p>
+                    <p>Looking at graffiti we see a very different situation.  First of all, the pandemic period request volume <em>decreased</em> 
+                       from that of the pre-pandemic period.  Further, while the 18.3% change may initially seem large, looking  
+                       at the historical data in the table below we see that this percent-change is actually the smallest seen in years. 
+                    As a result, while there was a change in volume, it doesn't seem at all unusual.</p>
+                       <table style="width:100%">
+                        <tr>
+                          <th>Year Ending</th>
+                          <th>Volume</th> 
+                          <th>Change From Prev. Year</th>
+                        </tr>
+                        <tr>
+                          <td>2/28/21</td>
+                          <td>635</td>
+                          <td>-18.3%</td>
+                        </tr>
+                        <tr>
+                          <td>2/29/20</td>
+                          <td>777</td>
+                          <td>+28.0%</td>
+                        </tr>
+                        <tr>
+                          <td>2/28/19</td>
+                          <td>607</td>
+                          <td>+24.1%</td>
+                        </tr>
+                         <tr>
+                          <td>2/28/18</td>
+                          <td>489</td>
+                          <td>-70.0%</td>
+                        </tr>
+                          <tr>
+                          <td>2/28/17</td>
+                          <td>1634</td>
+                          <td>not calculated</td>
+                        </tr>
+                          
+                      </table>
                 </div>
                 <div class="step">
-                    <p>Looking at streets</p>
+                    <p>Looking at street maintenance requests, we once again see a drammatic decrease in volume. 
+                        The large magnitude of the change is confirmed to be unusual when comparing it to the percent change 
+                        in previous years, in which changes of approximately 10% to 20% were typical.
+                    </p>
+                    <table style="width:100%">
+                        <tr>
+                          <th>Year Ending</th>
+                          <th>Volume</th> 
+                          <th>Change From Prev. Year</th>
+                        </tr>
+                        <tr>
+                          <td>2/28/21</td>
+                          <td>331</td>
+                          <td>-47.6%</td>
+                        </tr>
+                        <tr>
+                          <td>2/29/20</td>
+                          <td>632</td>
+                          <td>+20.4%</td>
+                        </tr>
+                        <tr>
+                          <td>2/28/19</td>
+                          <td>525</td>
+                          <td>+12.9%</td>
+                        </tr>
+                         <tr>
+                          <td>2/28/18</td>
+                          <td>465</td>
+                          <td>-20.4%</td>
+                        </tr>
+                          <tr>
+                          <td>2/28/17</td>
+                          <td>584</td>
+                          <td>not calculated</td>
+                        </tr>
+                          
+                      </table>
                 </div>
+
                 <div class="step">
-                    <p>Looking at parking</p>
+                    <p>Looking at illegal parking requests, we see only a nominal increase in volume from the previous year.  
+                        Looking at the table for changes in the preceding years we also see just how unusual that lack of change 
+                       is historically: clearly there had been a strong trend of increasing requests dealing with illegal parking 
+                     in the last few years.</p>
+                    <table style="width:100%">
+                        <tr>
+                          <th>Year Ending</th>
+                          <th>Volume</th> 
+                          <th>Change From Prev. Year</th>
+                        </tr>
+                        <tr>
+                          <td>2/28/21</td>
+                          <td>425</td>
+                          <td>+2.7%</td>
+                        </tr>
+                        <tr>
+                          <td>2/29/20</td>
+                          <td>414</td>
+                          <td>+58.6%</td>
+                        </tr>
+                        <tr>
+                          <td>2/28/19</td>
+                          <td>261</td>
+                          <td>+443.8%</td>
+                        </tr>
+                         <tr>
+                          <td>2/28/18</td>
+                          <td>48</td>
+                          <td>+45.4%</td>
+                        </tr>
+                          <tr>
+                          <td>2/28/17</td>
+                          <td>33</td>
+                          <td>not calculated</td>
+                        </tr>
+                          
+                      </table>
                 </div>
+
                 <div class="step">
-                    <p>Looking at litter</p>
+                    <p>Looking at litter, we see another increase in overall volume, and a larger increase than would 
+                        normally be expected from the historical changes for this category.
+                    </p>
+                    <table style="width:100%">
+                        <tr>
+                          <th>Year Ending</th>
+                          <th>Volume</th> 
+                          <th>Change From Prev. Year</th>
+                        </tr>
+                        <tr>
+                          <td>2/28/21</td>
+                          <td>321</td>
+                          <td>+50.0%</td>
+                        </tr>
+                        <tr>
+                          <td>2/29/20</td>
+                          <td>214</td>
+                          <td>-23.0%</td>
+                        </tr>
+                        <tr>
+                          <td>2/28/19</td>
+                          <td>278</td>
+                          <td>+32.4%</td>
+                        </tr>
+                         <tr>
+                          <td>2/28/18</td>
+                          <td>210</td>
+                          <td>+30.4%</td>
+                        </tr>
+                          <tr>
+                          <td>2/28/17</td>
+                          <td>161</td>
+                          <td>not calculated</td>
+                        </tr>
+                          
+                      </table>
                 </div>
         
                 <!-- line chart by month messages -->
                 <div class="step">
-                    <p>Monthly dumping request volume...  (click on year names to highlight one or more years, 
-                        and hover over dots to get monthly volume totals)</p>
+                    <p>Looking at monthly dumping request volume across the year for years 2016 through 2020, 
+                        we see that for most of 2020 monthly volumes for most of the year are actually similar 
+                        to previous years.  The August-October 2020 period is the exception, where a large peak 
+                        occurs.  If you this peak to those of the other categories in the following charts 
+                        (particularly that of littering requests), you will notice that the timing of this peak is different.
+
+                        <br/> 
+                        <span style="font-size:1rem;"><em>Note: click on year labels in the legend to 
+                            place focus on (or off) of one or more years.  Also hover over dots to get 
+                            monthly volume totals.</em></span>
+                    </p>
                 </div>
+
                 <div class="step">
-                    <p>Looking at graffiti</p>
+                    <p>Looking at graffiti request volume across the year for 2016 through 2020, we see that 
+                        graffiti requests were low and stable for most of the year, increasing slightly in 
+                        the fall before dropping again in December.  The pattern seems tame in comparison to 
+                        the large spring-time peak seen in 2016.
+                    </p>
                 </div>
+
                 <div class="step">
-                    <p>Looking at streets</p>
+                    <p>Looking at street maintenance requests we see a small peak in February 2020, however this 
+                        may not have been a peak if there weren't such a drammatic drop in requests in the months that 
+                        followed. The report volume decreased drammatically in March 2020, the same month that Alameda 
+                        County's shelter-in-place order for COVID-19 went in to effect, before gradually ticking upwards 
+                        throughout the year.  This drop in particular makes me wonder if there was actually  
+                        a decrease in problems in the streets, lights, and signs, or just fewer people motivated to 
+                        report those problems encountering them because fewer people were commuting.  
+
+                    </p>
                 </div>
+
                 <div class="step">
-                    <p>Looking at paDave J. Higginsrking</p>
+                    <p>Looking at illegal parking requests, we see that the these requests started lower in monthly volume 
+                        at the beginning of 2020 than they did in 2019, but peaked slightly higher in 2020, and mostly remained  
+                        higher in 2020 through the fall.  In both years these requests peak in the summer months, 
+                        when the lake is most popular. 
+                    </p>
                 </div>
+
                 <div class="step last-child">
-                    <p>Looking at litter</p>
-                </div>
+                    <p>Looking at litter, we see that the highest peak comes in May 2020, 
+                        and the volumes that year decline through the summer and increasing again in the fall. The 
+                        pattern through the spring and summer is generally similar to that of requests in 2019, but 
+                        falls more drammatically in July through September 2020 (about the time period that the state and 
+                        county were experiencing a worrying increase in COVID-19 cases), and increases in October and 
+                        November during the drop in state and county COVID-19 cases between the summer and winter peaks 
+                        (see this <a href="https://www.nytimes.com/interactive/2021/us/alameda-california-covid-cases.html" target="_blank">New York Times</a> data 
+                        for county details).  
+                        This makes me think that litter requests, in particular, best reflect the number of visitors 
+                        to Lake Merritt.
 
-
-                <!-- line chart by weekday messages -->
-
-                <!-- violin plot messages -->
-                
+                    </p>
+                </div>                
             </article>
         </div></section>
 
@@ -159,11 +396,22 @@
                 <div id="violinplot" class="mapcontainer"></div>
                 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
                 <script src="violin_plot.js"></script>
+
+                <div class="maptext" style="padding-top:100px">
+                    <p>
+                    In addition to the presence or lack of issues being reported, I wondered if the city's slow response to 
+                    requests might also be part of the situation frustrating residents.  Looking at the violin plots 
+                    showing the distributions of the numbers of days it took the city to close requests of the five 
+                    targeted types for requests in 2016 through 2020, we see that slow action by the city might in fact 
+                    be part of the frustration.  While requests for illegal dumping have a mean of only 4.4 days and an 
+                    inter-quartile range (IQR) of only 3 days, requests for litter have a mean of 23.1 days and and 
+                    IQR of 23 days.  
+                </p>
+                </div>
             </div>
         </section>
 
         <!-- map for hotspots-->
-
         <section id="hotspots">
             <div class="mapblock">
                 <h3 class="maptitle"></h3>
@@ -172,8 +420,16 @@
                 <script src="leaflet-heat.js"></script>
                 <script src="lm_reports_map.js"></script>
                     
-                <div class="maptext" id="reportsmaptext">
-
+                <div class="maptext" id="reportsmaptext" style="padding-top:50px;">
+                    If you click on the layer button in the upper-right corner of the map, you can select 
+                    a point marker or heat display of all of the 2020 reports for each of the five targeted 
+                    request categories.  Toggling between the heatmaps of different categories you will notice 
+                    that different issues show very different distribution patterns around the lake.  For example, 
+                    street maintenance requests are concentrated around intersections, while illegal dumping requests 
+                    are more spread along the length of roads.  And while illegal dumping is seen intensely in 
+                    residential areas (note the relative lack of dumping requests in the Financial District on 
+                    the upper-left side of the lake), graffiti requests are more frequent in public areas like 
+                    parks and the area around the Alameda County Administrative Building.
                 </div>
             </div>
         </section>
@@ -189,7 +445,24 @@
             </div>
 
             <div class="textblock">
-                <p>conclusions</p>
+                <p>From the data it does appear that the pandemic has in fact had an effect of a number of the issues that 
+                    have been cited by residents of the Lake Merritt area as problematic.  However, not all of those changes 
+                    constituted an <em>increase</em> in problems.  For example, while there were significant increases in 
+                    requests to address illegal dumping and littering, there was also a spectacular decrease in 
+                    requests for street maintenance.  Further, given that the various issues have had very different peaks in 
+                    2020, I suspect that they aren't all driven by the same human activity.  For example, while I think the 
+                    litter is likely to be produced by the visitors to the lake and the surrounding area (and perhaps compouned
+                     by the city's slow response to reports of it), dumping is more likely produced by residents of the area themselves, 
+                     rather than by visitors.  
+                </p>
+                <p>Lastly, the data here is limited. Other data, in particular incident data from the Oakland Police Department, probably 
+                    could have provided more insight on traffic issues and illegal activities like illegal fireworks, crime, 
+                    and noise ordinance violations.  These are all issues that the area residents have pointed to as problematic, but 
+                    simply are not reflected in the 311 requests.  Unfortunately, OPD incident data is only available in its unaggregated form 
+                    for the last 90 days, and so it was not possible to do an analysis comparing incident data to pre-pandemic levels, or to
+                    examine the data across the course of the pandemic.
+
+                </p>
             </div>
         </section>
         
