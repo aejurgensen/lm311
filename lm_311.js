@@ -502,7 +502,7 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                         color = colormap[colorscale(d)]; 
                     }
 
-                    color_legend.select(".circle_" + d).style("fill", color);
+                    color_legend.select(".circle_" + d).style("fill", color).style("stroke", color);
                     color_legend.select(".text_" + d).style("fill", color);
                 });
             }
