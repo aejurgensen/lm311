@@ -65,7 +65,6 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                 img1.style("display", "none")
                 img2.style("display", "block")
                 focus = "line_dumping";
-                //document.body.style.backgroundColor = "rgba(255, 254, 223, 0.5)";
                 line_plot();
                 break;
 
@@ -237,7 +236,8 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                         {
                         note: {
                             //label: "from pre-pandemic volume",
-                            title: direction + (d3.format(".3") (grouped[selected]["delta"] * 100)) + "% change"
+                            title: direction + d3.format(".1%") (grouped[selected]["delta"]) + " change"
+                            //(d3.format(".3") (grouped[selected]["delta"] * 100)) + "% change"
                         },
                         color: ["#606060"],
                         font: ["sans-serif"],
@@ -247,9 +247,6 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                         dy: text_y
                         }
                     ]
-
-                    /*d3.select(".annotation-note-content")
-                        .attr("font-family", "sans-serif")*/
                     
                     // Add annotation to the chart
                     const makeAnnotations = d3.annotation()
@@ -398,22 +395,13 @@ const stepH = Math.floor(window.innerHeight * 1.8);
 
             // base colors from colorbrewer 4-class Dark2 scheme, and non-focused
             // colors from colorbrewer 4-class Pastel2 scheme
-            let colors = ["#1b9e77", "#d95f02","#7570b3", "#66a61e", "#e7298a"];
+            let colors = ["#1b9e77", "#d95f02","#7570b3", "#66a61e", "#e7298a", "#e6ab02"];
             let colormap = {"#1b9e77":"#b3e2cd",
                             "#d95f02":"#fdcdac",
                             "#7570b3":"#cbd5e8",
                             "#66a61e":"#e6f5c9",
-                            "#e7298a":"#f4cae4"}
-
-            /*let annos = d3.select("body")
-                .append("div")
-                .style("position", "absolute")
-                .style("z-index", "10")
-                .style("visibility", "hidden")
-                .style("color", "white")
-                .style("background-color", "rgba(0, 0, 0, 0.75)")
-                .style("border-radius", "0.25px")    
-                .style("font", "18px sans-serif");   */
+                            "#e7298a":"#f4cae4",
+                            "#e6ab02":"#ffffcc"}
 
             // from example https://www.d3-graph-gallery.com/graph/custom_color.html
             let colorscale = d3.scaleOrdinal()
@@ -488,6 +476,7 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                 .data(years)
                 .enter()
                 .append("circle")
+                .attr("class", d => "circle_" + d)
                 .attr("cx", w - right + 15)
                 .attr("cy", function(d, i) {return h / 4 + 25 * (i + 1);})
                 .attr("r", 5)
@@ -498,12 +487,25 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                 .data(years)
                 .enter()
                 .append("text")
+                .attr("class", d => "text_" + d)
                 .attr("x",  w - right + 35)
                 .attr("y", function(d, i) {return h / 4 + 25 * (i + 1) + 5;})
                 .style("fill", d => colorscale(d))
                 .attr("font-family", "sans-serif")
                 .style("font-size", "16px")
                 .text(d => d);
+
+            function update_color_legend_colors() {
+                years.forEach(function(d) {
+                    let color = colorscale(d);
+                    if (selected_years.length > 0 && !selected_years.includes(d)) { 
+                        color = colormap[colorscale(d)]; 
+                    }
+
+                    color_legend.select(".circle_" + d).style("fill", color);
+                    color_legend.select(".text_" + d).style("fill", color);
+                });
+            }
 
             color_legend.selectAll("rect")
                 .data(years)
@@ -553,12 +555,16 @@ const stepH = Math.floor(window.innerHeight * 1.8);
             let dots = line_svg.append('g')
                 .attr("class","dots");
 
+            let annos = bar_svg.append("g");
+
             // plot lines and dots
             function plot() {
                 lines.selectAll("line").remove();            
                 dots.selectAll("circle").remove();
+                annos.selectAll(".annotation.callout").remove();
 
                 rearrangeLines();
+                update_color_legend_colors();
 
                 lines.selectAll("chartlines")
                 .data(line_data)
