@@ -45,7 +45,7 @@ d3.csv("oakland_311_clipped_cleaned.csv").then(function(data) {
 }).then(function(data) {
     let haveDelta = [];
     let target_categories = ["dumping", "graffiti", "litter", "streets", "parking"];
-    
+
     data.forEach(function(d) {
         if (d.delta != null && d.delta >= 0 && target_categories.includes(d.category) && d.year >= 2016) {
             haveDelta.push(d);
@@ -82,6 +82,7 @@ d3.csv("oakland_311_clipped_cleaned.csv").then(function(data) {
     }]
 
     var layout = {
+        autosize:true,
         title: "Days to Close Request (2016-2020)",
         xaxis: {
           zeroline: false,
