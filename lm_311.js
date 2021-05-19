@@ -7,6 +7,7 @@ const stepH = Math.floor(window.innerHeight * 1.8);
         var img1 = d3.select('#img1');
         var img2 = d3.select('#img2');
         var img3 = d3.select('#img3');
+        var img4 = d3.select('#violinplot');
 
         var article = d3.select('article');
         var steps = d3.selectAll('.step');
@@ -26,9 +27,10 @@ const stepH = Math.floor(window.innerHeight * 1.8);
         function handleStepChange(response) {
             switch(response.index) {
             case 0:
-                img1.style("display", "block")
-                img2.style("display", "none")
-                img3.style("display", "none")
+                img1.style("display", "block");
+                img2.style("display", "none");
+                img3.style("display", "none");
+                img4.style("display", "none");
                 focus = "bar_none";
                 bar_plot();
                 break;
@@ -54,16 +56,20 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                 break;
 
             case 5:
-                img1.style("display", "block")
-                img2.style("display", "none")
+                img1.style("display", "block");
+                img2.style("display", "none");
+                img3.style("display", "none");
+                img4.style("display", "none");
                 focus = "bar_litter";
                 bar_plot();
                 //document.body.style.backgroundColor = "rgba(253, 221, 199, .5)";
                 break;
 
             case 6:
-                img1.style("display", "none")
-                img2.style("display", "block")
+                img1.style("display", "none");
+                img2.style("display", "block");
+                img3.style("display", "none");
+                img4.style("display", "none");                
                 focus = "line_dumping";
                 line_plot();
                 break;
@@ -84,8 +90,26 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                 break;
 
             case 10: 
+                img1.style("display", "none");
+                img2.style("display", "block");
+                img3.style("display", "none");
+                img4.style("display", "none");
                 focus = "line_litter";
                 line_plot();
+                break;
+
+            case 11:
+                img1.style("display", "none");
+                img2.style("display", "none");
+                img3.style("display", "block");
+                img4.style("display", "none");
+                break;
+
+            case 12:
+                img1.style("display", "none");
+                img2.style("display", "none");
+                img3.style("display", "none");
+                img4.style("display", "block");
                 break;
 
             default:
@@ -555,7 +579,7 @@ const stepH = Math.floor(window.innerHeight * 1.8);
             let dots = line_svg.append('g')
                 .attr("class","dots");
 
-            let annos = bar_svg.append("g");
+            let annos = line_svg.append("g");
 
             // plot lines and dots
             function plot() {

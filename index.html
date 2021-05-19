@@ -116,6 +116,8 @@
             <figure><div class="figure1"> 
                 <svg height="100%" id="img1" ></svg>
                 <svg class="svg2" height="100%" id="img2" ></svg>
+                <svg class="dowchart" id="img3"></svg>
+                <div id="violinplot" style="margin:auto;"></div>
             </div></figure>
 
             <article>
@@ -373,7 +375,7 @@
                     </p>
                 </div>
 
-                <div class="step last-child">
+                <div class="step">
                     <p>Looking at litter, we see that the highest peak comes in May 2020, 
                         and the volumes that year decline through the summer and increasing again in the fall. The 
                         pattern through the spring and summer is generally similar to that of requests in 2019, but 
@@ -386,30 +388,71 @@
                         to Lake Merritt.
 
                     </p>
-                </div>                
-            </article>
-        </div></section>
-
-        <!-- violin plot -->
-        <section id="violin">
-            <div class="mapblock">
-                <div id="violinplot" class="mapcontainer"></div>
-                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-                <script src="violin_plot.js"></script>
-
-                <div class="maptext" style="padding-top:100px">
+                </div>        
+                
+                <div class="step next-to-last-child">
                     <p>
-                    In addition to the presence or lack of issues being reported, I wondered if the city's slow response to 
+                        Looking at the volume of requests across the days of the week for 
+                        the different types of request issues, we see that 
+                        different request types peak at different points during the week.  For example, 
+                        we see that Monday is the most common day for illegal dumping, while Tuesday and Thursday are the most common day for graffiti requests 
+                        in 2020, though not in previous years. If all the issues were being exacerbated by the increase in visitors by the lake, 
+                        we might expect to see similar patterns of of reporting across the week, either over 
+                        the weekend when the crowds at the lake are at their largest, or on Monday in the 
+                        immediate aftermath of the weekend. That, however, does not appear to be the case.
+
+                        <br>
+                        <span style="font-size:1rem;"><em>Use the selectors below to update the plot. 
+                              Note that the y-axis changes by request issue but not by year.
+                        </em></span>
+
+                    </p>
+                    <div class="container">
+                        <label for="year">Year:</label>
+                        <select id="year" name="year">
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                        </select>
+
+                        <label for="issue">Request Issue:</label>
+                        <select id="issue" name="issue">
+                            <option value="dumping">Illegal Dumping</option>
+                            <option value="graffiti">Graffiti</option>
+                            <option value="streets">Street Maintenance</option>
+                            <option value="parking">Illegal Parking</option>
+                            <option value="litter">Litter</option>
+                        </select>
+
+                        <!--<label for="aggregation">Aggregation:</label>
+                        <select id="aggregation" name="aggregation">
+                            <option value="averaged">Averaged</option>
+                            <option value="summed">Summed</option>-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="step last-child">
+                    <p>
+                        In addition to the presence or lack of issues being reported, I wondered if the city's slow response to 
                     requests might also be part of the situation frustrating residents.  Looking at the violin plots 
                     showing the distributions of the numbers of days it took the city to close requests of the five 
                     targeted types for requests in 2016 through 2020, we see that slow action by the city might in fact 
                     be part of the frustration.  While requests for illegal dumping have a mean of only 4.4 days and an 
                     inter-quartile range (IQR) of only 3 days, requests for litter have a mean of 23.1 days and and 
-                    IQR of 23 days.  
-                </p>
+                    IQR of 23 days.
+                    </p>
                 </div>
-            </div>
-        </section>
+            </article>
+
+            <!--scripts for scrollama plots that aren't integrated into lm_311.js-->
+            <script src="dow.js"></script>
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+            <script src="violin_plot.js"></script>
+            <script src="d3-boxplot.js"></script>
+        </div></section>
 
         <!-- map for hotspots-->
         <section id="hotspots">

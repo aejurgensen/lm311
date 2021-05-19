@@ -120,13 +120,6 @@ figure {
     font-style: italic;
 }
 
-/* https://www.w3docs.com/snippets/html/how-to-create-a-list-with-dashes-in-html.html */
-/*.infosource ul li:before {
-    content: '\2014';
-    position: absolute;
-    margin-left: -20px;
-}*/
-
 .infosource ul {
     padding:0px;
 }
@@ -237,7 +230,6 @@ figure {
     border-radius: 15px;
     border-width: 10px;
     box-shadow: inset 0 0 10px gray;
-    
 }
 
 @media only screen and (max-device-width: 1366px) {
@@ -268,3 +260,20 @@ table, th, td {
     border: 1px solid dimgray;
     color: dimgray;
 }
+
+/* css adapted from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_stacked_form */
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  div.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
