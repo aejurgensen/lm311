@@ -113,7 +113,10 @@ const stepH = Math.floor(window.innerHeight * 1.8);
                 break;
 
             default:
-                // do nothing
+                img1.style("display", "block");
+                img2.style("display", "none");
+                img3.style("display", "none");
+                img4.style("display", "none");
             }
         }
 
